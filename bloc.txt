@@ -1,0 +1,63 @@
+config/
+      --auth/
+            --passport.config.js
+      --db/
+          --connect.config.js
+      --models/
+              --student.model.js
+              --user.model.js
+middleware/
+          --logger.middleware.js
+          --user.middleware.js
+node_modules/
+routes/
+      --auth.router.js
+      --home.router.js
+      --student.router.js
+server/
+      --server.js
+
+.gitignore
+.env
+app.js
+package-block.json
+package.json
+-------------------------------------
+config/auth/passport.config.js
+config/db/connect.config.js
+config/models/student.model.js
+config/models/user.model.js
+
+middleware/logger.middleware.js
+middleware/user.middleware.js
+
+routes/auth.router.js
+routes/home.router.js
+routes/student.router.js
+
+server/server.js
+
+package.json
+app.js
+.env
+-----------------------------------------------
+SIMULACION REGISTRO DE USUARIO: 
+
+user/register: 
+
+{
+  "first_name": "Juan",
+  "last_name": "Perez", 
+  "age": 30,
+  "email": "juan.perez@email.com",
+  "password": "password123"
+}
+------------------------------------
+
+user/login:
+
+{
+    "email": "juan.perez@email.com",
+  "password": "password123"
+}
+

@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-12">
+        <h1>Órdenes</h1>
+        
+        {{#if orders.length}}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Cliente</th>
+                            <th>Email</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each orders}}
+                        <tr>
+                            <td>{{this.code}}</td>
+                            <td>{{this.buyerName}}</td>
+                            <td>{{this.buyerEmail}}</td>
+                            <td>{{formatMoney this.total}}</td>
+                            <td>
+                                <span class="badge bg-{{#eq this.status 'pending'}}warning{{/eq}}{{#eq this.status 'paid'}}success{{/eq}}{{#eq this.status 'delivered'}}info{{/eq}}{{#eq this.status 'cancelled'}}danger{{/eq}}">
+                                    {{this.status}}
+                                </span>
+                            </td>
+                            <td>{{formatDate this.createdAt}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            {{#if pagination.pages}}
+            <nav>
+                <ul class="pagination">
+                    {{#range 1 pagination.pages}}
+                    <li class="page-item {{#eq this pagination.page}}active{{/eq}}">
+                        <a class="page-link" href="?page={{this}}&limit={{pagination.limit}}">{{this}}</a>
+                    </li>
+                    {{/range}}
+                </ul>
+            </nav>
+            {{/if}}
+        {{else}}
+            <div class="alert alert-info">
+                No hay órdenes para mostrar.
+            </div>
+        {{/if}}
+    </div>
+</div>

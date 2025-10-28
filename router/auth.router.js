@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { User } from '../config/models/user.model.js';
+import User from '../config/models/user.model.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { requireJwtCookie } from "../middleware/user.middleware.js";
+import env from '../config/env.config.js'; // ✅ Import agregado para JWT_SECRET
 
 const router = Router();
 
@@ -27,13 +28,13 @@ router.post("/register", async (req, res) => {
 // JWT Routes
 router.post('/jwt/login', async (req, res) => {
     const { email, password } = req.body;
-    if (!email || !password) return res.status(400).json({ error: "Faltan Credenciales" });    
+    if (!email || !password) return res.status(400).json({ error: "Faltan credenciales" }); // ✅ Tilde corregida    
     
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ error: "Credenciales invalidas" });
+    if (!user) return res.status(400).json({ error: "Credenciales inválidas" }); // ✅ Tilde corregida
     
     const ok = await bcrypt.compare(password, user.password);
-    if (!ok) return res.status(400).json({ error: "Contraseña invalida" });
+    if (!ok) return res.status(400).json({ error: "Contraseña inválida" }); // ✅ Tilde corregida
 
     const payload = {
         sub: String(user._id), 
@@ -42,7 +43,7 @@ router.post('/jwt/login', async (req, res) => {
         role: user.role
     };
     
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign(payload, env.JWT_SECRET, { expiresIn: "1h" }); // ✅ Corregido environment a env
 
     // httpOnly cookie
     res.cookie('access_token', token, {
@@ -70,7 +71,7 @@ router.get('/jwt/me', requireJwtCookie, async (req, res) => {
     res.json({ user: { first_name, last_name, email, age, role } });
 });
 
-router.post('/jwt/logout', (req, res) => {
+router.post('/jwt/logout', (_req, res) => {
     res.clearCookie('access_token', { path: '/' });
     res.json({ message: "Logout OK - Cookie de JWT borrada" });
 });

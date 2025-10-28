@@ -1,8 +1,7 @@
 import passport from "passport";
 import { Strategy as JwtStrategy } from "passport-jwt";
-import { User } from '../models/user.model.js';
-import dotenv from "dotenv";
-dotenv.config();
+import User from '../../models/user.model.js';
+import enviroment from '../../env.config.js';
 
 // Función que sirve para leer el token JWT desde las cookies httpOnly 'access_token'
 function cookieExtractor(req) {
@@ -17,7 +16,7 @@ export function initPassport() {
     passport.use('jwt-cookie', new JwtStrategy(
         {
             jwtFromRequest: cookieExtractor,
-            secretOrKey: process.env.JWT_SECRET
+            secretOrKey: enviroment.JWT_SECRET
         },
         async (payload, done) => {
             try {

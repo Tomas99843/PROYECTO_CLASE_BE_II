@@ -1,3 +1,5 @@
 import { startServer } from "./server/server.js";
 
-await startServer();
+(async () => {
+  await startServer();
+})();

@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { Student } from '../config/models/student.model.js';
-import { requireJwtCookie, requireRole } from '../middleware/user.middleware.js';
-
+import Student from '../config/models/student.model.js';
+import { requireJwtCookie } from '../middleware/user.middleware.js';
+import { requireRole } from '../middleware/policies.middleware.js';
 const router = Router();
 
 // GET - Todos los estudiantes
-router.get('/', requireJwtCookie, async (req, res) => {
+router.get('/', requireJwtCookie, async (_req, res) => {
     try {
         const students = await Student.find();
         res.status(200).json(students);

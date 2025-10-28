@@ -1,11 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'; // ✅ Cambiado a ES6 import
 
 const studentSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
     },
-    
     age: {
         type: Number,
         required: true
@@ -16,5 +15,4 @@ const studentSchema = new mongoose.Schema({
         unique: true
     }
 });
-
-export const Student = mongoose.model('Student', studentSchema);
+export default mongoose.model('Student', studentSchema);

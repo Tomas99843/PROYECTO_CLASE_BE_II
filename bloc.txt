@@ -51,3 +51,11 @@ services/student.service.js
 .env
 app.js
 package.json
+
+
+
+git init
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Tomas99843/PROYECTO_CLASE_BE_II.git
+git push -u origin main
